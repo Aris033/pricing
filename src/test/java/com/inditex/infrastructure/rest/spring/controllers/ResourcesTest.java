@@ -4,9 +4,7 @@ package com.inditex.infrastructure.rest.spring.controllers;
 import com.inditex.application.repository.PricingRepository;
 import com.inditex.application.service.PricingService;
 import com.inditex.domain.Pricing;
-import com.inditex.infrastructure.config.spring.SpringBootService;
 import com.inditex.infrastructure.config.spring.TestRestTemplateConfig;
-import com.inditex.infrastructure.rest.spring.controllers.Resources;
 import com.inditex.infrastructure.rest.spring.dto.CustomDto;
 import com.inditex.infrastructure.rest.spring.mapper.PricingMapper;
 import com.inditex.utils.UtilsTest;
@@ -17,24 +15,21 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.concurrent.CountDownLatch;
 
+import static com.inditex.infrastructure.config.spring.SpringBootServiceTest.beforeAll;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
@@ -60,22 +55,12 @@ class ResourcesTest {
     @Value("${test.baseUri}")
     private String baseUri;
 
-    private static CountDownLatch latch = new CountDownLatch(1);
-
 
     @BeforeEach
     void setup() throws InterruptedException {
         MockitoAnnotations.initMocks(this);
         resources = new Resources(pricingService, pricingMapper);
-
-        if (latch.getCount() > 0) {
-            // Inicializa el latch solo una vez
-            new Thread(() -> {
-                SpringApplication.run(SpringBootService.class);
-                latch.countDown(); // Asegura que el latch se reduzca solo una vez
-            }).start();
-            latch.await(); // Espera a que el servidor esté levantado
-        }
+        beforeAll();
     }
 
     @Test
@@ -96,19 +81,6 @@ class ResourcesTest {
     }
 
     // -- TEST DE PRUEBAS:
-    private String buildUri(LocalDateTime date, int brandId, int productId) {
-        return UriComponentsBuilder.fromHttpUrl(baseUri)
-                .path("/pricing/date/{date}/brand/{brandId}/product/{productId}")
-                .buildAndExpand(
-                        formatDate(date),
-                        brandId,
-                        productId)
-                .toUriString();
-    }
-
-    private String formatDate(LocalDateTime date) {
-        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm"));
-    }
     @Test
     public void testGetValidPrice_request1() throws Exception {
         int brandId = 1;
@@ -192,9 +164,18 @@ class ResourcesTest {
         assertThat(response.getBody().getPrice()).isEqualTo("38.95");
     }
 
+    private String buildUri(LocalDateTime date, int brandId, int productId) {
+        return UriComponentsBuilder.fromHttpUrl(baseUri)
+                .path("/pricing/date/{date}/brand/{brandId}/product/{productId}")
+                .buildAndExpand(
+                        formatDate(date),
+                        brandId,
+                        productId)
+                .toUriString();
+    }
+
+    private String formatDate(LocalDateTime date) {
+        return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm"));
+    }
+
 }
-
-
-
-
-

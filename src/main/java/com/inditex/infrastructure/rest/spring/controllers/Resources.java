@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
 @RestController
+@RequiredArgsConstructor
 public class Resources {
 
     private final PricingService pricingService;
     private final PricingMapper pricingMapper;
 
+    /**
+     * Retrieves the latest valid price for a specific brand and product on a specific date.
+     *
+     * @param date      the date for which to retrieve the valid price (formatted as "yyyy-MM-dd-HH-mm")
+     * @param brandId   the ID of the brand
+     * @param productId the ID of the product
+     * @return a ResponseEntity containing the latest valid price for the specified brand, product, and date, or an error response if no valid price is found
+     */
     @GetMapping("pricing/date/{date}/brand/{brandId}/product/{productId}")
     public ResponseEntity<?> getValidPrice(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd-HH-mm") LocalDateTime date,
                                            @PathVariable int brandId, @PathVariable int productId) {

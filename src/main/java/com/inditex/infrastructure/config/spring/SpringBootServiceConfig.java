@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringBootServiceConfig {
-
-
   @Bean
   public PricingService pricingService(PricingRepository pricingRepository) {
     return new PricingService(pricingRepository);

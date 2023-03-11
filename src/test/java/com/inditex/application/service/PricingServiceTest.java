@@ -4,16 +4,15 @@ import com.inditex.application.repository.PricingRepository;
 import com.inditex.application.service.PricingService;
 import com.inditex.domain.Pricing;
 import com.inditex.exception.NotFoundException;
+import com.inditex.infrastructure.config.spring.SpringBootService;
 import com.inditex.infrastructure.db.springdata.dbo.PricesEntity;
 import com.inditex.utils.UtilsTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,7 +25,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
+import static com.inditex.infrastructure.config.spring.SpringBootServiceTest.beforeAll;
 import static com.inditex.utils.UtilsTest.createPricing;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -39,13 +40,15 @@ class PricingServiceTest {
 
     @InjectMocks
     private PricingService pricingService;
+
     @MockBean
     private PricingRepository pricingRepository;
 
     @BeforeEach
-    void setup() {
+    void setup() throws InterruptedException {
         MockitoAnnotations.initMocks(this);
         pricingService = new PricingService(pricingRepository);
+        beforeAll();
     }
 
     @Test
