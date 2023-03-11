@@ -39,6 +39,17 @@ To install and use this controller, follow these steps:
 The following endpoint is provided by this controller:
 
 ### GET /pricing/date/{date}/brand/{brandId}/product/{productId}
+Local example: http://localhost:8080/pricing/date/2020-06-15-10-30/brand/1/product/35455
+
+Response:`
+{
+"productId": 35455,
+"brandId": 1,
+"priceList": 3,
+"startDate": "2020-06-15-00-00",
+"endDate": "2020-06-15-11-00",
+"price": 30.50
+}`
 
 This endpoint retrieves the valid price of a product for a specific brand at a specific date and time. The `date` parameter should be in the format `yyyy-MM-dd-HH-mm`. The `brandId` and `productId` parameters should be integers.
 

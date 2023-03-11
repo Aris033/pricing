@@ -1,4 +1,4 @@
-package com.inditex.infrastructure.rest.spring;
+package com.inditex.infrastructure.rest.spring.controllers;
 
 import com.inditex.application.service.PricingService;
 import com.inditex.domain.Pricing;

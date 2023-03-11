@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication(scanBasePackages = "com.inditex.infrastructure")
-@EntityScan(basePackages = "com.inditex.domain")
+@EntityScan(basePackages = {"com.inditex.domain", "com.inditex.application"})
 public class SpringBootService {
 
   public static void main(String[] args) {

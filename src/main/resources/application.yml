@@ -1,19 +1,31 @@
 spring:
-  mvc:
-    format:
-      date-time: "yyyy-MM-dd HH:mm:ss"
-
   datasource:
     url: jdbc:h2:mem:h2-console
     username: sa
     password:
     driverClassName: org.h2.Driver
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.H2Dialect
 
   h2:
     console:
       enabled: true
       path: /h2-console
-      settings.trace: true
-      settings.web-allow-others: true
+      settings:
+        trace: true
+        web-allow-others: true
+
+  mvc:
+    format:
+      date-time: "yyyy-MM-dd HH:mm:ss"
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
+test:
+  baseUri: http://localhost:8080
+
+logging:
+  level:
+    com.logs.microservices: ERROR

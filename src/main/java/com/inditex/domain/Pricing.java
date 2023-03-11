@@ -14,8 +14,8 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Pricing {
-    private int brandId;
 
+    private int brandId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private long priceList;
