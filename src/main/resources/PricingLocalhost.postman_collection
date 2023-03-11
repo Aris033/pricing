@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "f863a969-ec3d-4935-90ab-14d1ceff6b3c",
+		"name": "Localhost",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15394901"
+	},
+	"item": [
+		{
+			"name": "GetPrice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/pricing/date/2020-06-15-10-30/brand/1/product/35455",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"pricing",
+						"date",
+						"2020-06-15-10-30",
+						"brand",
+						"1",
+						"product",
+						"35455"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
