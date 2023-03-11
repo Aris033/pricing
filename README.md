@@ -1,6 +1,6 @@
-# Pricing Resources :shopping:
+# Pricing  :shopping:
 
-This is a Spring REST controller for managing pricing resources. It provides an endpoint for retrieving the valid price of a product for a specific brand at a specific date and time.
+This is a Spring boot application for managing pricing resources. It provides an endpoint for retrieving the valid price of a product for a specific brand at a specific date and time.
 
 
 ## Requirements
