@@ -13,8 +13,8 @@ import java.util.List;
 
 public class UtilsTest {
 
-    private static final LocalDateTime START = LocalDateTime.parse("2020-06-14T10:00:00");
-    private static final LocalDateTime END = LocalDateTime.parse("2020-07-14T10:00:00");
+    public static final LocalDateTime START = LocalDateTime.parse("2020-06-14T10:00:00");
+    public static final LocalDateTime END = LocalDateTime.parse("2020-07-14T10:00:00");
 
     public static Pricing createPricing() {
         Pricing pricing = new Pricing();

@@ -4,6 +4,8 @@ package com.inditex.infrastructure.rest.spring.controllers;
 import com.inditex.application.repository.PricingRepository;
 import com.inditex.application.service.PricingService;
 import com.inditex.domain.Pricing;
+import com.inditex.exception.ErrorResponse;
+import com.inditex.exception.NotFoundException;
 import com.inditex.infrastructure.config.spring.TestRestTemplateConfig;
 import com.inditex.infrastructure.rest.spring.dto.CustomDto;
 import com.inditex.infrastructure.rest.spring.mapper.PricingMapper;
@@ -163,6 +165,29 @@ class ResourcesTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().getPrice()).isEqualTo("38.95");
     }
+//    @Test
+//    public void testGetValidPrice_priceNotFound() throws Exception {
+//        int brandId = 1;
+//        int productId = 35455;
+//        LocalDateTime date = LocalDateTime.parse("2029-06-14T10:00:00");
+//        when(pricingService.getValidPrice(date, brandId, productId)).thenThrow(new NotFoundException("Price not found"));
+//        String uri = buildUri(date, brandId, productId);
+//        ResponseEntity<CustomDto> response = restTemplate.exchange(uri, HttpMethod.GET, null, CustomDto.class);
+//
+//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+//    }
+//
+//    @Test
+//    public void testGetValidPrice_internalServerError() throws Exception {
+//        int brandId = 1;
+//        int productId = 35455;
+//        LocalDateTime date = LocalDateTime.parse("2020-06-14T10:00:00");
+//        when(pricingService.getValidPrice(date, brandId, productId)).thenThrow(new RuntimeException("Internal server error"));
+//        String uri = buildUri(date, brandId, productId);
+//        ResponseEntity<ErrorResponse> response = restTemplate.exchange(uri, HttpMethod.GET, null, ErrorResponse.class);
+//
+//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 
     private String buildUri(LocalDateTime date, int brandId, int productId) {
         return UriComponentsBuilder.fromHttpUrl(baseUri)

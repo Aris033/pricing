@@ -7,38 +7,32 @@ This is a Spring boot application for managing pricing resources. It provides an
 
 To use this controller, you need to have the following:
 
-- Java 11 or higher
+- Java 11
 - Spring Boot 2.4 or higher
 - Maven build tool
 
 ## Installation
 
 To install and use this controller, follow these steps:
-
 1. Clone the Pricing repository.
 2. Open the project in your preferred IDE.
 3. Build the project using the following Maven command:
    - mvn clean install
-   - mvn install
 4. Run the following command to execute the project:
-
-mvn spring-boot:run
+   - mvn spring-boot:run
 
 With these steps, you should have the project up and running.
-## Installation
 
-To install and use this controller, follow these steps:
+### Useful links
+- `H2 Console` : http://localhost:8080/h2-console
+- `Postman Collection` : src/main/resources/PricingLocalhost.postman_collection
+- `jacoco report` : target/site/jacoco/index.html
 
-1. Clone this repository.
-2. Open the project in your preferred IDE.
-3. Run the project as a Spring Boot application.
-4. Use the endpoint to retrieve the valid price for a product.
+## API
 
-## Endpoint
+The following api is provided by this endPoint:
 
-The following endpoint is provided by this controller:
-
-### GET /pricing/date/{date}/brand/{brandId}/product/{productId}
+### `GET /pricing/date/{date}/brand/{brandId}/product/{productId}`
 Local example: http://localhost:8080/pricing/date/2020-06-15-10-30/brand/1/product/35455
 
 Response:`
