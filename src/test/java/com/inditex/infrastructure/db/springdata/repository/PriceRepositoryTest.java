@@ -23,13 +23,6 @@ class PriceRepositoryTest {
     }
 
     @Test
-    void testFindByPriceList() {
-        PricesEntity pricesEntity = mock(PricesEntity.class);
-        when(priceRepository.findByPriceList(1L)).thenReturn(pricesEntity);
-        assertEquals(priceRepository.findByPriceList(1L), pricesEntity);
-    }
-
-    @Test
     void testFindByBrandIdAndProductId() {
         List<PricesEntity> pricesEntities = new ArrayList<>();
         when(priceRepository.findByBrandIdAndProductId(1, 2)).thenReturn(pricesEntities);
